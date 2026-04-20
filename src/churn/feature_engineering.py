@@ -13,12 +13,11 @@ import time
 from pathlib import Path
 from typing import Optional
 
-import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from src.config import PROCESSED_DATA_DIR, RATINGS_PROCESSED, TRAIN_FILE
+from src.config import PROCESSED_DATA_DIR, RATINGS_PROCESSED
 from src.logging_utils import get_logger
 
 logger = get_logger("churn.features", "churn")

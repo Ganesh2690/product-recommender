@@ -14,17 +14,14 @@ Phase 10 — Retraining and Promotion Pipeline
 import json
 import sys
 import time
-from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from src.config import (
-    ARTIFACTS_DIR,
     ITEM_FEATURES,
     MODELS_DIR,
     RATINGS_FILE,
-    RATINGS_PROCESSED,
     SVD_N_FACTORS,
     TEST_FILE,
     TRAIN_FILE,

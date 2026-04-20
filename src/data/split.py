@@ -24,7 +24,6 @@ from src.config import (
     RANDOM_SEED,
     SPLIT_STRATEGY,
     TEST_FILE,
-    TEST_RATIO,
     TRAIN_FILE,
     TRAIN_RATIO,
     VAL_FILE,

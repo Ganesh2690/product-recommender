@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from flask import Blueprint, Response, jsonify, render_template, request
 
-from src.config import ARTIFACTS_DIR, PROCESSED_DATA_DIR
+from src.config import ARTIFACTS_DIR
 from src.logging_utils import get_logger
 
 logger = get_logger("admin", "api")

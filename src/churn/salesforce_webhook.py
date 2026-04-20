@@ -21,7 +21,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from src.config import ARTIFACTS_DIR, PROCESSED_DATA_DIR
+from src.config import ARTIFACTS_DIR
 from src.logging_utils import get_logger
 
 logger = get_logger("churn.salesforce", "churn")
@@ -53,11 +53,11 @@ def _get_sf_token(
     import urllib.request
 
     payload = urllib.parse.urlencode({
-        "grant_type":    "password",
-        "client_id":     client_id,
+        "grant_type": "password",
+        "client_id": client_id,
         "client_secret": client_secret,
-        "username":      username,
-        "password":      password + security_token,
+        "username": username,
+        "password": password + security_token,
     }).encode()
 
     token_url = f"{instance_url}/services/oauth2/token"
@@ -115,12 +115,12 @@ def push_churn_alerts(
         return {"total_flagged": 0, "sent": 0, "failed": 0, "dry_run": dry_run}
 
     # Resolve SF credentials from env
-    sf_instance_url    = os.getenv("SF_INSTANCE_URL", "https://login.salesforce.com")
-    sf_client_id       = os.getenv("SF_CLIENT_ID", "")
-    sf_client_secret   = os.getenv("SF_CLIENT_SECRET", "")
-    sf_username        = os.getenv("SF_USERNAME", "")
-    sf_password        = os.getenv("SF_PASSWORD", "")
-    sf_security_token  = os.getenv("SF_SECURITY_TOKEN", "")
+    sf_instance_url = os.getenv("SF_INSTANCE_URL", "https://login.salesforce.com")
+    sf_client_id = os.getenv("SF_CLIENT_ID", "")
+    sf_client_secret = os.getenv("SF_CLIENT_SECRET", "")
+    sf_username = os.getenv("SF_USERNAME", "")
+    sf_password = os.getenv("SF_PASSWORD", "")
+    sf_security_token = os.getenv("SF_SECURITY_TOKEN", "")
 
     creds_present = all([sf_client_id, sf_client_secret, sf_username, sf_password])
 

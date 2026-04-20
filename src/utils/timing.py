@@ -2,7 +2,6 @@
 timing.py — Runtime measurement utilities.
 """
 
-import contextlib
 import time
 from typing import Optional
 

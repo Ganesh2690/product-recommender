@@ -2,24 +2,19 @@
 test_data_pipeline.py — Tests for data loading, validation, preprocessing, and splitting.
 """
 
-import json
 import sys
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.config import (
-    MIN_RATINGS_PER_USER,
     RATINGS_COLS,
     MOVIES_COLS,
     USERS_COLS,
     TRAIN_RATIO,
-    VAL_RATIO,
-    TEST_RATIO,
 )
 
 

@@ -10,7 +10,6 @@ Phase 10 — Model Promotion
 
 import json
 import sys
-import time
 from pathlib import Path
 from typing import Optional
 
@@ -171,12 +170,12 @@ def promote_if_better(
     else:
         logger.info(
             f"NOT promoting '{candidate_model_name}': "
-            f"improvement {(candidate_p10-prod_p10)/max(prod_p10,1e-8):.2%} < "
+            f"improvement {(candidate_p10-prod_p10)/max(prod_p10, 1e-8):.2%} < "
             f"threshold {PROMOTION_MIN_IMPROVEMENT_PCT:.1%}"
         )
         logger.end_phase(
             "Model Promotion",
-            f"Production model retained (candidate did not meet threshold)",
+            "Production model retained (candidate did not meet threshold)",
             "Continue with existing production model",
         )
         return False

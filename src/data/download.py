@@ -6,7 +6,6 @@ Every execution logs to data_pipeline.log and run_log.jsonl.
 """
 
 import hashlib
-import os
 import sys
 import time
 import zipfile
@@ -73,7 +72,7 @@ def download_movielens(force: bool = False) -> bool:
             response = requests.get(MOVIELENS_URL, stream=True, timeout=60)
             response.raise_for_status()
 
-            total_bytes = int(response.headers.get("content-length", 0))
+            total_bytes = int(response.headers.get("content-length", 0))  # noqa: F841
             downloaded = 0
 
             with open(str(MOVIELENS_ZIP), "wb") as f:

@@ -68,8 +68,8 @@ def generate_experiment_report(results: Dict[str, Dict]) -> Path:
         "",
         "## Success Threshold Check",
         "",
-        f"| Metric | Target | Best Model | Value | Status |",
-        f"|--------|--------|------------|-------|--------|",
+        "| Metric | Target | Best Model | Value | Status |",
+        "|--------|--------|------------|-------|--------|",
     ]
 
     # Find best values
@@ -158,9 +158,9 @@ def generate_success_metrics_report(results: Dict[str, Dict]) -> Path:
         "",
         "| Metric | Target | Achieved | Status |",
         "|--------|--------|----------|--------|",
-        f"| HR@10 | >= {TARGET_HR_AT_10} | {_fmt(best_metrics.get('hr@10', float('nan')))} | {'✅' if best_metrics.get('hr@10', 0) >= TARGET_HR_AT_10 else '❌'} |",
-        f"| Precision@10 | >= {TARGET_PRECISION_AT_10} | {_fmt(best_metrics.get('precision@10', float('nan')))} | {'✅' if best_metrics.get('precision@10', 0) >= TARGET_PRECISION_AT_10 else '❌'} |",
-        f"| Recall@10 | >= {TARGET_RECALL_AT_10} | {_fmt(best_metrics.get('recall@10', float('nan')))} | {'✅' if best_metrics.get('recall@10', 0) >= TARGET_RECALL_AT_10 else '❌'} |",
+        f"| HR@10 | >= {TARGET_HR_AT_10} | {_fmt(best_metrics.get('hr@10', float('nan')))} | {'✅' if best_metrics.get('hr@10', 0) >= TARGET_HR_AT_10 else '❌'} |",  # noqa: E501
+        f"| Precision@10 | >= {TARGET_PRECISION_AT_10} | {_fmt(best_metrics.get('precision@10', float('nan')))} | {'✅' if best_metrics.get('precision@10', 0) >= TARGET_PRECISION_AT_10 else '❌'} |",  # noqa: E501
+        f"| Recall@10 | >= {TARGET_RECALL_AT_10} | {_fmt(best_metrics.get('recall@10', float('nan')))} | {'✅' if best_metrics.get('recall@10', 0) >= TARGET_RECALL_AT_10 else '❌'} |",  # noqa: E501
         f"| NDCG@10 | reported | {_fmt(best_metrics.get('ndcg@10', float('nan')))} | ✅ |",
         f"| MAP@10 | reported | {_fmt(best_metrics.get('map@10', float('nan')))} | ✅ |",
         f"| RMSE | < popularity baseline | {_fmt(best_metrics.get('rmse', float('nan')))} | ✅ (SVD-based) |",

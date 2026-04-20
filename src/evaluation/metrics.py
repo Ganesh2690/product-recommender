@@ -14,7 +14,7 @@ All metrics follow the standard definitions used in CF research papers (2006–2
 
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import numpy as np
 

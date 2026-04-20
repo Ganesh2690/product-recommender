@@ -136,7 +136,7 @@ def build_user_item_matrix(ratings: pd.DataFrame) -> tuple:
         shape=(len(unique_users), len(unique_movies)),
         dtype=np.float32,
     )
-    logger.info(f"User-item matrix: {matrix.shape} — {matrix.nnz:,} non-zeros ({1-matrix.nnz/np.prod(matrix.shape):.2%} sparse)")
+    logger.info(f"User-item matrix: {matrix.shape} — {matrix.nnz:,} non-zeros ({1-matrix.nnz/np.prod(matrix.shape):.2%} sparse)")  # noqa: E501
     logger.log_metric("matrix_shape", matrix.shape, "user-item interaction matrix")
     logger.log_metric("matrix_nnz", matrix.nnz, "non-zero entries")
     return matrix, user_id_map, movie_id_map

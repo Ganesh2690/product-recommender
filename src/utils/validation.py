@@ -4,7 +4,7 @@ validation.py — Input and data validation utilities.
 
 import sys
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import Any, List
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
