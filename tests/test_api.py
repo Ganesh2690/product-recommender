@@ -54,15 +54,14 @@ def mock_cache():
 @pytest.fixture(scope="module")
 def app(mock_engine, mock_cache):
     """Create Flask test client with mocked dependencies."""
-    # Patch the module-level references used by app.py's lazy getters
-    with patch("src.serving.app.get_engine", return_value=mock_engine), \
-         patch("src.serving.app.get_cache", return_value=mock_cache):
+    # Import the module first so it is in sys.modules, then patch
+    import src.serving.app as app_mod
+    with patch.object(app_mod, "get_engine", return_value=mock_engine), \
+         patch.object(app_mod, "get_cache", return_value=mock_cache):
         # Reset cached singletons so our mocks are picked up
-        import src.serving.app as app_mod
         app_mod._engine = mock_engine
         app_mod._cache = mock_cache
-        from src.serving.app import create_app
-        flask_app = create_app()
+        flask_app = app_mod.create_app()
         flask_app.config["TESTING"] = True
         with flask_app.test_client() as client:
             yield client
