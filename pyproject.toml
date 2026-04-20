@@ -15,7 +15,6 @@ dependencies = [
     "scipy>=1.11",
     "scikit-learn>=1.3",
     "scikit-surprise>=1.1.3",
-    "lightfm>=1.17",
     "flask>=2.3",
     "gunicorn>=21",
     "redis>=4.6",
