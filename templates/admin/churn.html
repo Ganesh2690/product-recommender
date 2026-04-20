@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recommender Admin — Churn</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+    header { background: #16213e; color: #e2e8f0; padding: 1rem 2rem;
+             display: flex; align-items: center; justify-content: space-between; }
+    header h1 { font-size: 1.3rem; font-weight: 600; }
+    header nav a { color: #94a3b8; margin-left: 1.5rem; text-decoration: none; font-size: .9rem; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem; }
+    .section { background: #fff; border-radius: 10px; padding: 1.5rem;
+               box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 1.5rem; }
+    h2 { font-size: .95rem; font-weight: 600; color: #475569; text-transform: uppercase;
+         letter-spacing: .05em; margin-bottom: 1rem; }
+    dl { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem 2rem; }
+    dt { font-size: .8rem; color: #64748b; }
+    dd { font-weight: 600; }
+    .good { color: #16a34a; }
+    .bad  { color: #dc2626; }
+    pre  { background: #f8fafc; padding: 1rem; border-radius: 6px; font-size: .8rem;
+           overflow-x: auto; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Recommender Admin — Churn</h1>
+  <nav>
+    <a href="/admin/">Dashboard</a>
+    <a href="/admin/churn">Churn</a>
+    <a href="/admin/models">Models</a>
+  </nav>
+</header>
+<div class="container">
+
+  <div class="section">
+    <h2>Evaluation Metrics</h2>
+    <dl>
+      <dt>AUC-ROC</dt>
+      <dd class="{{ 'good' if churn_eval.get('auc_roc', 0) >= 0.88 else 'bad' }}">{{ churn_eval.get('auc_roc', '—') }}</dd>
+      <dt>F1 Score</dt>
+      <dd class="{{ 'good' if churn_eval.get('f1_score', 0) >= 0.75 else 'bad' }}">{{ churn_eval.get('f1_score', '—') }}</dd>
+      <dt>Train size</dt>
+      <dd>{{ churn_eval.get('train_size', '—') }}</dd>
+      <dt>Test size</dt>
+      <dd>{{ churn_eval.get('test_size', '—') }}</dd>
+      <dt>Churn rate (train)</dt>
+      <dd>{{ churn_eval.get('churn_rate_train', '—') }}</dd>
+      <dt>Churn rate (test)</dt>
+      <dd>{{ churn_eval.get('churn_rate_test', '—') }}</dd>
+    </dl>
+  </div>
+
+  <div class="section">
+    <h2>Best Hyperparameters</h2>
+    <pre>{{ tuning | tojson(indent=2) }}</pre>
+  </div>
+
+  <div class="section">
+    <h2>Salesforce Push Result</h2>
+    <dl>
+      <dt>Total flagged</dt><dd>{{ sf_result.get('total_flagged', '—') }}</dd>
+      <dt>Sent</dt><dd>{{ sf_result.get('sent', '—') }}</dd>
+      <dt>Failed</dt><dd>{{ sf_result.get('failed', '—') }}</dd>
+      <dt>Dry run</dt><dd>{{ sf_result.get('dry_run', '—') }}</dd>
+    </dl>
+  </div>
+
+  <div class="section">
+    <h2>Drift Report</h2>
+    <pre>{{ drift | tojson(indent=2) }}</pre>
+  </div>
+
+</div>
+</body>
+</html>

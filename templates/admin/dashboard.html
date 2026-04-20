@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Recommender Admin — Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+    header { background: #16213e; color: #e2e8f0; padding: 1rem 2rem;
+             display: flex; align-items: center; justify-content: space-between; }
+    header h1  { font-size: 1.3rem; font-weight: 600; }
+    header nav a { color: #94a3b8; margin-left: 1.5rem; text-decoration: none; font-size: .9rem; }
+    header nav a:hover { color: #fff; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem; }
+    h2 { font-size: 1rem; font-weight: 600; color: #475569; text-transform: uppercase;
+         letter-spacing: .05em; margin-bottom: 1rem; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 1rem; margin-bottom: 2rem; }
+    .kpi { background: #fff; border-radius: 10px; padding: 1.2rem;
+           box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    .kpi .label { font-size: .78rem; color: #64748b; margin-bottom: .4rem; }
+    .kpi .value { font-size: 1.9rem; font-weight: 700; }
+    .kpi .target { font-size: .75rem; color: #94a3b8; margin-top: .25rem; }
+    .good  { color: #16a34a; }
+    .bad   { color: #dc2626; }
+    .na    { color: #94a3b8; }
+    .section { background: #fff; border-radius: 10px; padding: 1.5rem;
+               box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 1.5rem; }
+    table  { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    th     { background: #f8fafc; text-align: left; padding: .6rem .8rem;
+             font-size: .78rem; color: #64748b; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+    td     { padding: .6rem .8rem; border-bottom: 1px solid #f1f5f9; }
+    tr:last-child td { border: none; }
+    .badge { display: inline-block; padding: .2rem .55rem; border-radius: 9999px;
+             font-size: .72rem; font-weight: 600; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-red   { background: #fee2e2; color: #b91c1c; }
+    .badge-gray  { background: #f1f5f9; color: #475569; }
+    .bar-wrap { background: #f1f5f9; border-radius: 4px; height: 8px; margin-top: 4px; }
+    .bar      { height: 8px; border-radius: 4px; background: #4C72B0; }
+    footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: .8rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Recommender Admin</h1>
+  <nav>
+    <a href="/admin/">Dashboard</a>
+    <a href="/admin/churn">Churn</a>
+    <a href="/admin/models">Models</a>
+    <a href="/health">Health</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- Model info banner -->
+  <div style="background:#16213e;color:#94a3b8;border-radius:8px;padding:.7rem 1.2rem;
+              font-size:.82rem;margin-bottom:1.5rem;">
+    Active model: <strong style="color:#e2e8f0;">{{ current_model }}</strong>
+  </div>
+
+  <!-- ── Recommender KPIs ── -->
+  <h2>Recommender Metrics (k=10)</h2>
+  <div class="kpi-grid">
+    {% set hr = benchmark.get('hybrid', benchmark).get('hr@10') %}
+    {% set p10 = benchmark.get('hybrid', benchmark).get('precision@10') %}
+    {% set ndcg = benchmark.get('hybrid', benchmark).get('ndcg@10') %}
+    {% set rmse = benchmark.get('hybrid', benchmark).get('rmse') %}
+
+    <div class="kpi">
+      <div class="label">HR@10</div>
+      <div class="value {{ 'good' if hr and hr >= target_hr else ('bad' if hr else 'na') }}">
+        {{ '%.3f'|format(hr) if hr else '—' }}
+      </div>
+      <div class="target">Target ≥ {{ target_hr }}</div>
+    </div>
+
+    <div class="kpi">
+      <div class="label">Precision@10</div>
+      <div class="value {{ 'good' if p10 and p10 >= target_p10 else ('bad' if p10 else 'na') }}">
+        {{ '%.3f'|format(p10) if p10 else '—' }}
+      </div>
+      <div class="target">Target ≥ {{ target_p10 }}</div>
+    </div>
+
+    <div class="kpi">
+      <div class="label">NDCG@10</div>
+      <div class="value {{ 'good' if ndcg and ndcg >= 0.25 else ('bad' if ndcg else 'na') }}">
+        {{ '%.3f'|format(ndcg) if ndcg else '—' }}
+      </div>
+      <div class="target">Target ≥ 0.25</div>
+    </div>
+
+    <div class="kpi">
+      <div class="label">RMSE</div>
+      <div class="value {{ 'good' if rmse and rmse <= 0.95 else ('bad' if rmse else 'na') }}">
+        {{ '%.4f'|format(rmse) if rmse else '—' }}
+      </div>
+      <div class="target">Target ≤ 0.95</div>
+    </div>
+  </div>
+
+  <!-- ── Churn Model KPIs ── -->
+  <h2>Churn Model Metrics</h2>
+  <div class="kpi-grid">
+    {% set auc = churn_eval.get('auc_roc') %}
+    {% set f1  = churn_eval.get('f1_score') %}
+
+    <div class="kpi">
+      <div class="label">AUC-ROC</div>
+      <div class="value {{ 'good' if auc and auc >= target_auc else ('bad' if auc else 'na') }}">
+        {{ '%.4f'|format(auc) if auc else '—' }}
+      </div>
+      <div class="target">Target ≥ {{ target_auc }}</div>
+    </div>
+
+    <div class="kpi">
+      <div class="label">F1 Score</div>
+      <div class="value {{ 'good' if f1 and f1 >= target_f1 else ('bad' if f1 else 'na') }}">
+        {{ '%.4f'|format(f1) if f1 else '—' }}
+      </div>
+      <div class="target">Target ≥ {{ target_f1 }}</div>
+    </div>
+
+    <div class="kpi">
+      <div class="label">Drift Status</div>
+      {% set n_severe = drift.get('n_severe', 0) %}
+      <div class="value {{ 'bad' if n_severe > 0 else 'good' }}">
+        {{ 'ALERT' if n_severe > 0 else 'OK' }}
+      </div>
+      <div class="target">{{ n_severe }} feature(s) with PSI > 0.25</div>
+    </div>
+
+    <div class="kpi">
+      <div class="label">Cache Hit Rate</div>
+      <div class="value na">
+        {{ '%.1f%%'|format(cache_stats.get('hit_rate', 0) * 100) }}
+      </div>
+      <div class="target">Backend: {{ cache_stats.get('backend', '—') }}</div>
+    </div>
+  </div>
+
+  <!-- ── SHAP Feature Importance ── -->
+  {% if shap_importance %}
+  <div class="section">
+    <h2 style="margin-bottom:.8rem;">SHAP Global Feature Importance (Churn)</h2>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Mean |SHAP|</th><th style="width:40%">Importance</th></tr>
+      </thead>
+      <tbody>
+        {% set max_val = shap_importance[0][1] %}
+        {% for feat, val in shap_importance %}
+        <tr>
+          <td>{{ feat }}</td>
+          <td>{{ '%.4f'|format(val) }}</td>
+          <td>
+            <div class="bar-wrap">
+              <div class="bar" style="width:{{ (val / max_val * 100)|int }}%"></div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  <!-- ── Drift Report ── -->
+  {% if drift.get('features') %}
+  <div class="section">
+    <h2 style="margin-bottom:.8rem;">Feature Drift Report</h2>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>PSI</th><th>KS Stat</th><th>Level</th></tr>
+      </thead>
+      <tbody>
+        {% for feat, info in drift['features'].items() %}
+        <tr>
+          <td>{{ feat }}</td>
+          <td>{{ info.psi }}</td>
+          <td>{{ info.ks_stat }}</td>
+          <td>
+            <span class="badge {{ 'badge-red' if info.drift_level == 'severe' else ('badge-gray' if info.drift_level == 'moderate' else 'badge-green') }}">
+              {{ info.drift_level }}
+            </span>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+</div>
+
+<footer>Recommender Admin {{ "2026" }} — Internal use only</footer>
+</body>
+</html>

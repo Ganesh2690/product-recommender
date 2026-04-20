@@ -1,0 +1,132 @@
+[
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5425",
+    "Description": "User 5425 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5425",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5429",
+    "Description": "User 5429 has a churn probability of 99.8%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5429",
+    "Churn_Probability__c": 0.9981,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5430",
+    "Description": "User 5430 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5430",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5431",
+    "Description": "User 5431 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5431",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5432",
+    "Description": "User 5432 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5432",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5434",
+    "Description": "User 5434 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5434",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5435",
+    "Description": "User 5435 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5435",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5436",
+    "Description": "User 5436 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5436",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5438",
+    "Description": "User 5438 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5438",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  },
+  {
+    "attributes": {
+      "type": "Task"
+    },
+    "Subject": "Churn Risk Alert \u2014 User 5440",
+    "Description": "User 5440 has a churn probability of 100.0%. Top contributing factor: days_since_last. Review engagement history and initiate retention campaign.",
+    "Priority": "High",
+    "Status": "Not Started",
+    "ActivityDate": "2026-04-15",
+    "External_User_ID__c": "5440",
+    "Churn_Probability__c": 0.9995,
+    "Top_Churn_Factor__c": "days_since_last"
+  }
+]

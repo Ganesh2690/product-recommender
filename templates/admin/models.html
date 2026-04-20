@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recommender Admin — Models</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+    header { background: #16213e; color: #e2e8f0; padding: 1rem 2rem;
+             display: flex; align-items: center; justify-content: space-between; }
+    header h1 { font-size: 1.3rem; font-weight: 600; }
+    header nav a { color: #94a3b8; margin-left: 1.5rem; text-decoration: none; font-size: .9rem; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem; }
+    .section { background: #fff; border-radius: 10px; padding: 1.5rem;
+               box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 1.5rem; }
+    h2 { font-size: .95rem; font-weight: 600; color: #475569; text-transform: uppercase;
+         letter-spacing: .05em; margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    th { background: #f8fafc; text-align: left; padding: .5rem .8rem;
+         font-size: .78rem; color: #64748b; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+    td { padding: .55rem .8rem; border-bottom: 1px solid #f1f5f9; }
+    tr:last-child td { border: none; }
+    .badge-prod { display:inline-block; padding:.2rem .5rem; border-radius:9999px;
+                  font-size:.7rem; font-weight:600; background:#dcfce7; color:#15803d; }
+    .path { font-size:.75rem; color:#94a3b8; word-break:break-all; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Recommender Admin — Models</h1>
+  <nav>
+    <a href="/admin/">Dashboard</a>
+    <a href="/admin/churn">Churn</a>
+    <a href="/admin/models">Models</a>
+  </nav>
+</header>
+<div class="container">
+  <div class="section">
+    <h2>Model Registry (recent 20)</h2>
+    {% if models %}
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Timestamp</th><th>Promoted</th>
+          <th>HR@10</th><th>P@10</th><th>AUC</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in models|reverse %}
+        <tr>
+          <td>
+            {{ m.model_name }}
+            {% if current and current in m.artifact_path %}
+              <span class="badge-prod">PROD</span>
+            {% endif %}
+            <div class="path">{{ m.artifact_path.split('\\')[-1] }}</div>
+          </td>
+          <td style="white-space:nowrap">{{ m.timestamp[:19] if m.timestamp else '—' }}</td>
+          <td>{{ '✓' if m.promoted else '—' }}</td>
+          <td>{{ m.metrics.get('hr@10', m.metrics.get('hybrid', {}).get('hr@10', '—')) }}</td>
+          <td>{{ m.metrics.get('precision@10', m.metrics.get('hybrid', {}).get('precision@10', '—')) }}</td>
+          <td>{{ m.metrics.get('auc_roc', '—') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:#94a3b8;font-size:.9rem;">No models registered yet. Run the training pipeline.</p>
+    {% endif %}
+  </div>
+</div>
+</body>
+</html>

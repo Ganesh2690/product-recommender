@@ -1,0 +1,27 @@
+{
+  "best_params": {
+    "subsample": 0.9,
+    "reg_lambda": 5.0,
+    "reg_alpha": 0.1,
+    "n_estimators": 100,
+    "min_child_weight": 3,
+    "max_depth": 3,
+    "learning_rate": 0.2,
+    "gamma": 0,
+    "colsample_bytree": 0.7
+  },
+  "best_cv_auc": 1.0,
+  "n_iter": 20,
+  "cv_folds": 5,
+  "feature_cols": [
+    "total_ratings",
+    "avg_rating",
+    "std_rating",
+    "rating_sessions",
+    "days_since_first",
+    "days_since_last",
+    "avg_session_gap_days",
+    "pct_high_rating",
+    "genre_diversity"
+  ]
+}

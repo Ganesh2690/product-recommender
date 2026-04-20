@@ -1,0 +1,39 @@
+{
+  "auc_roc": 1.0,
+  "f1_score": 1.0,
+  "classification_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1119.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 89.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1208.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1208.0
+    }
+  },
+  "train_size": 4832,
+  "test_size": 1208,
+  "churn_rate_train": 0.0737,
+  "churn_rate_test": 0.0737,
+  "targets_met": {
+    "auc_roc_gte_0_88": true,
+    "f1_gte_0_75": true
+  }
+}

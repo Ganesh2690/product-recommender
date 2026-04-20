@@ -1,0 +1,1 @@
+C:\Users\ganes\OneDrive\Desktop\Projects\Projects\Product recommender\data\artifacts\models\popularity_model.pkl

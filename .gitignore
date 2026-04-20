@@ -1,0 +1,76 @@
+# ---- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# ---- Virtual environments -------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Data files -----------------------------------------------------------
+data/raw/
+data/processed/
+data/splits/
+*.zip
+*.gz
+*.tar
+*.parquet
+*.npz
+*.npy
+
+# ---- Model artifacts ------------------------------------------------------
+models/
+*.pkl
+*.pickle
+*.joblib
+
+# ---- Experiment tracking --------------------------------------------------
+mlruns/
+mlflow.db
+
+# ---- Jupyter notebooks (checkpoints) ------------------------------------
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# ---- IDE / editors --------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---- OS -------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Environment / secrets ------------------------------------------------
+.env
+*.env
+*.pem
+*.key
+
+# ---- Logs -----------------------------------------------------------------
+logs/*.log
+logs/*.jsonl
+# Keep markdown tracking logs
+!logs/*.md
+
+# ---- Test coverage --------------------------------------------------------
+.coverage
+htmlcov/
+.pytest_cache/
+coverage.xml
+
+# ---- Distribution -------------------------------------------------------------------------
+MANIFEST
