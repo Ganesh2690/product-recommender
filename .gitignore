@@ -29,7 +29,8 @@ data/splits/
 *.npy
 
 # ---- Model artifacts ------------------------------------------------------
-models/
+/data/artifacts/models/
+data/models/
 *.pkl
 *.pickle
 *.joblib
