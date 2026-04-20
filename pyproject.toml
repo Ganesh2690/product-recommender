@@ -18,7 +18,6 @@ dependencies = [
     "flask>=2.3",
     "gunicorn>=21",
     "redis>=4.6",
-    "mlflow>=2.8",
     "requests>=2.31",
     "tqdm>=4.66",
     "python-dotenv>=1.0",
@@ -32,6 +31,9 @@ dev = [
     "jupyter>=1.0",
     "matplotlib>=3.8",
     "seaborn>=0.13",
+]
+mlflow = [
+    "mlflow>=2.8",
 ]
 
 [tool.setuptools.packages.find]

@@ -25,8 +25,10 @@ redis>=4.6
 
 # -----------------------------------------------------------------------
 # Experiment tracking (post-2017 modernisation, labelled clearly)
+# Optional — only needed when MLFLOW_TRACKING=true. Not required for tests.
+# Install with: pip install mlflow>=2.8
 # -----------------------------------------------------------------------
-mlflow>=2.8
+# mlflow>=2.8
 
 # -----------------------------------------------------------------------
 # Utilities
